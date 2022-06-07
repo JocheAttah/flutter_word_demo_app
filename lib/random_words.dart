@@ -8,8 +8,8 @@ class RandomWords extends StatefulWidget {
 }
 
 class RandomWordsState extends State<RandomWords> {
-  final _randomWordPairs = <WordPair>[];
-  final _savedWordPairs = Set<WordPair>();
+  final _randomWordPairs = <WordPair>[]; //List()
+  final _savedWordPairs = <WordPair>{}; //Set()
 
   Widget _buildList() {
     return ListView.builder(
