@@ -45,10 +45,48 @@ class RandomWordsState extends State<RandomWords> {
     );
   }
 
+  void _pushSaved(){
+    Navigator.of(context).push(
+      MaterialPageRoute<void>(
+        builder: (BuildContext context){
+          final Iterable<ListTile> tiles = _savedWordPairs.map(
+            (WordPair pair){
+              return ListTile(
+                title: Text(
+                  pair.asPascalCase,
+                  style: const TextStyle(fontSize: 18),
+                ),
+              );
+            },
+          );
+          final List<Widget> divided = ListTile.divideTiles(
+            context: context,
+            tiles: tiles,
+          ).toList();
+
+          return Scaffold(
+            appBar: AppBar(
+              title: const Text('Saved Suggestions'),
+            ),
+            body: ListView(children: divided),
+          );
+        },
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('English Word Genrator')),
+      appBar: AppBar(
+        title: const Text('English Word Genrator'),
+        actions: <Widget>[
+          IconButton(
+            onPressed: _pushSaved, 
+            icon: const Icon(Icons.list)
+            ),
+        ]
+      ),
       body: _buildList(),
     );
   }
